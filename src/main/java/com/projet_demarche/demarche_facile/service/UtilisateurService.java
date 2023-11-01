@@ -95,6 +95,7 @@ public class UtilisateurService {
         user.setEmail(utilisateur.getEmail());
         user.setMotDePasse(utilisateur.getMotDePasse());
 
+
         if(multipartFile != null){
             String location = "C:\\xampp\\htdocs\\demarche";
             try{
@@ -103,7 +104,7 @@ public class UtilisateurService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    utilisateur.setImage("http://localhost/demarche/"
+                    user.setImage("http://localhost/demarche/"
                             +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -112,12 +113,12 @@ public class UtilisateurService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            utilisateur.setImage("http://localhost/demarche/"
+                            user.setImage("http://localhost/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            utilisateur.setImage("http://localhost/demarche/"
+                            user.setImage("http://localhost/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -128,7 +129,7 @@ public class UtilisateurService {
                 throw new Exception(e.getMessage());
             }
         }
-        return  utilisateurRepository.save(utilisateur);
+        return  utilisateurRepository.save(user);
     }
 
     //Suppression de l'utilisateur
