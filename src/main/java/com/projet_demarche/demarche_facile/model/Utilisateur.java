@@ -35,5 +35,7 @@ public class Utilisateur {
     @JsonIgnore
     private List<Forum> forum;
 
-
+    @OneToMany(mappedBy = "utilisateur")
+    @JsonIgnore
+    private List<ContactUserAdmin> contactUserAdmins;
 }

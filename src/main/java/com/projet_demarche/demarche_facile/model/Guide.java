@@ -1,8 +1,11 @@
 package com.projet_demarche.demarche_facile.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -25,4 +28,8 @@ public class Guide {
     @ManyToOne
     @JoinColumn(name = "idAdmin")
     private Admin admin;
+
+    @OneToMany(mappedBy = "guide")
+    @JsonIgnore
+    private List<Document> documents;
 }

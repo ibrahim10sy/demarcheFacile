@@ -3,13 +3,15 @@ package com.projet_demarche.demarche_facile.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
-public class ListeGuide {
+public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idListe;
+    private long idDocument;
 
     @Column(nullable = true)
     private String image;
@@ -17,9 +19,20 @@ public class ListeGuide {
     @Column(nullable = true)
     private String audio;
 
+    @Column(nullable = true)
+    private String fichier;
+
     @Column(nullable = false)
     private String nom;
 
     @Column(nullable = false)
-    private String service;
+    private String description;
+
+    @ManyToOne
+    @JoinColumn(name="idGuide")
+    private Guide guide;
+
+    @ManyToMany
+    @JoinColumn(name = "idBureau")
+    private List<Bureau> bureaux;
 }

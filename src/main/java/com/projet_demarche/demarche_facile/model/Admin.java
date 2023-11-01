@@ -38,4 +38,16 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     @JsonIgnore
     private List<Guide> guides;
+
+    @OneToMany(mappedBy = "admin")
+    @JsonIgnore
+    private List<Bureau> bureaux;
+
+    @OneToMany(mappedBy = "admin")
+    @JsonIgnore
+    private List<Forum> forums;
+
+    @OneToMany(mappedBy = "admin")
+    @JsonIgnore
+    private List<ContactUserAdmin> contactUserAdmins;
 }

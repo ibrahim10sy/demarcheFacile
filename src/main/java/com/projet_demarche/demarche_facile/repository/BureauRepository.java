@@ -1,0 +1,9 @@
+package com.projet_demarche.demarche_facile.repository;
+
+import com.projet_demarche.demarche_facile.model.Bureau;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BureauRepository extends JpaRepository<Bureau, Long> {
+}
