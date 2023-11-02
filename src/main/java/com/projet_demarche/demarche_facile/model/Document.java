@@ -1,5 +1,6 @@
 package com.projet_demarche.demarche_facile.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,6 +34,11 @@ public class Document {
     private Guide guide;
 
     @ManyToMany
-    @JoinColumn(name = "idBureau")
+    @JoinTable(
+            name = "bureau_document",
+            joinColumns = @JoinColumn(name = "idDocument"),
+            inverseJoinColumns = @JoinColumn(name = "idBureau")
+    )
+    @JsonIgnore
     private List<Bureau> bureaux;
 }

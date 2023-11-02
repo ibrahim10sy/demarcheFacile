@@ -1,5 +1,6 @@
 package com.projet_demarche.demarche_facile.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -32,6 +33,11 @@ public class Bureau {
     private Admin admin;
 
     @ManyToMany
-    @JoinColumn(name = "idDocument")
+    @JoinTable(
+            name = "bureau_document",
+            joinColumns = @JoinColumn(name = "idBureau"),
+            inverseJoinColumns = @JoinColumn(name = "idDocument")
+    )
+    @JsonIgnore
     private List<Document> documents;
 }

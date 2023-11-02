@@ -24,12 +24,16 @@ public class Guide {
     @Column(nullable = false)
     private String libelle;
 
+    @Column(nullable = false)
+    private String description;
+
+    @OneToMany(mappedBy = "guide")
+    @JsonIgnore
+    private List<Document> documents;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "idAdmin")
     private Admin admin;
 
-    @OneToMany(mappedBy = "guide")
-    @JsonIgnore
-    private List<Document> documents;
 }

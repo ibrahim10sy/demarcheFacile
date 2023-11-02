@@ -5,6 +5,7 @@ import com.projet_demarche.demarche_facile.model.Admin;
 import com.projet_demarche.demarche_facile.repository.AdminRepository;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 public class AdminService {
 
+    @Autowired
     private AdminRepository adminRepository;
 
     //création de admin
@@ -93,7 +95,7 @@ public class AdminService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    admin.setImage("http://localhost:8080/demarche"
+                    admin1.setImage("http://localhost/demarche/"
                             +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -102,12 +104,12 @@ public class AdminService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            admin.setImage("http://localhost:8080/demarche"
+                            admin1.setImage("http://localhost/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            admin.setImage("http://localhost:8080/demarche"
+                            admin1.setImage("http://localhost/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -118,9 +120,22 @@ public class AdminService {
                 throw new Exception(e.getMessage());
             }
         }
-           return adminRepository.save(admin);
+           return adminRepository.save(admin1);
         }
 
-        
+        public  String deleteAdmin(Admin admin){
+        Admin admin1 = adminRepository.findByIdAdmin(admin.getIdAdmin());
+        if(admin1 == null)
+            throw new EntityNotFoundException("Ce compte n'existe pas");
+        adminRepository.delete(admin1);
+        return "Compte supprimé avec succèss";
+        }
+
+        public Admin connexion(String email, String mdp){
+        Admin admin = adminRepository.findByEmailAndMotDePasse(email,mdp);
+        if(admin == null)
+            throw new EntityNotFoundException("Connexion impossible");
+        return admin;
+        }
 
 }
