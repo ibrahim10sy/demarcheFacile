@@ -21,7 +21,7 @@ public class GuideService {
 
     //methode ajout
     public Guide createGuide(Guide guide, MultipartFile multipartFileImage, MultipartFile multipartFileAudio) throws Exception {
-        if(guideRepository.findByNom(guide.getLibelle()) == null){
+        if(guideRepository.findByLibelle(guide.getLibelle()) == null){
             //ajout de l'image
             if(multipartFileImage != null){
                 String location = "C:\\xampp\\htdocs\\demarche";
@@ -96,7 +96,7 @@ public class GuideService {
         }
     }
     //methode update
-    public Guide updateGuide(Guide guide,long id,MultipartFile multipartFileImage, MultipartFile multipartFileAudio) throws Exception {
+    public Guide updateGuide(Guide guide,long id, MultipartFile multipartFileImage, MultipartFile multipartFileAudio) throws Exception {
         Guide guide1 = guideRepository.findById(id).orElseThrow(()->
                 new EntityNotFoundException("Guide non trouvé"));
         guide1.setLibelle(guide.getLibelle());

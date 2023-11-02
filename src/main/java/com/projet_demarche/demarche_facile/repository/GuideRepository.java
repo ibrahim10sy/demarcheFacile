@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface GuideRepository extends JpaRepository<Guide,Long> {
 
     public Guide findByIdGuide(long id);
-    public Guide findByNom(String nom);
+    public Guide findByLibelle(String libelle);
 }
