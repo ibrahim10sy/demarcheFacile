@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.naming.AuthenticationException;
+import java.util.Map;
+
 @RestController
 @CrossOrigin
 @RequestMapping("admin")
@@ -60,10 +63,17 @@ public class AdminController {
         return new ResponseEntity<>(adminService.deleteAdmin(admin), HttpStatus.OK);
     }
 
-    @PostMapping("/login")
+  /*  @PostMapping("/login")
     @Operation(summary = "Connexion au compte admin")
-    public Object connexion(@RequestParam("email") String email, @RequestParam("mdp") String mdp){
-        return adminService.connexion(email,mdp);
-    }
+    public Object connexion(@RequestParam("email") String email, @RequestParam("motDePasse") String motDePasse) throws AuthenticationException {
+        return adminService.connexion(email,motDePasse);
+    }*/
+  @PostMapping("/connexion")
+  @Operation(summary = "Connexion d'un utilisateur")
+  public Object connexion(@RequestBody Map<String, String> requestBody) {
+      String email = requestBody.get("email");
+      String motDePasse = requestBody.get("motDePasse");
+      return adminService.connexion(email, motDePasse);
+  }
 
 }

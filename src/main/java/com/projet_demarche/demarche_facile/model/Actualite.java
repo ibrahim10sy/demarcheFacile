@@ -5,28 +5,32 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
-public class Concour {
+public class Actualite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idConcour;
+    private long idActualite;
 
     @Column(nullable = false)
     private String libelle;
+
+    @Column(nullable = true)
+    private String image;
 
     @Column(nullable = false)
     private String description;
 
     @NotNull(message = "Désole la date ne doit pas etre null")
     @Column(nullable = false)
-    private LocalDate dateDebut;
+    private Date dateDebut;
 
 
     @Column(nullable = false)
-    private LocalDate dateFin;
+    private Date dateFin;
 
     @NotNull
     @ManyToOne

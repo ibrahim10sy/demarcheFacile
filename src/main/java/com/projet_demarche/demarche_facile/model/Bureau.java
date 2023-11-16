@@ -32,7 +32,7 @@ public class Bureau {
     @JoinColumn(name="idAdmin")
     private Admin admin;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "bureau_document",
             joinColumns = @JoinColumn(name = "idBureau"),

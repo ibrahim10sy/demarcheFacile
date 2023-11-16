@@ -134,8 +134,8 @@ public class UtilisateurService {
 
     //Suppression de l'utilisateur
 
-    public String deleteUserById(Utilisateur utilisateur){
-        Utilisateur user = utilisateurRepository.findByIdUtilisateur(utilisateur.getIdUtilisateur());
+    public String deleteUserById(long id){
+        Utilisateur user = utilisateurRepository.findByIdUtilisateur(id);
         if(user == null){
             throw new EntityNotFoundException("Désolé l'utilisateur à supprimer n'existe pas");
         }
@@ -144,8 +144,8 @@ public class UtilisateurService {
     }
 
     //connexion d'user
-    public Utilisateur connexion(String email, String mdp){
-        Utilisateur utilisateur = utilisateurRepository.findByEmailAndMotDePasse(email, mdp);
+    public Utilisateur connexion(String email, String motDePsse){
+        Utilisateur utilisateur = utilisateurRepository.findByEmailAndMotDePasse(email, motDePsse);
         if(utilisateur == null){
             throw  new EntityNotFoundException("Ce compte n'existe pas");
         }

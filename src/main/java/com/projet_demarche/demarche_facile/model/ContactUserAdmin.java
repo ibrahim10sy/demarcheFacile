@@ -13,6 +13,9 @@ public class ContactUserAdmin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idContact;
 
+    @Column(nullable = false)
+    private String message;
+
     @ManyToOne
     @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;

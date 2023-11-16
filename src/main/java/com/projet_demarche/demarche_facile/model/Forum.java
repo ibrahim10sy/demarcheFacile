@@ -21,7 +21,7 @@ public class Forum {
     @Column(nullable = false)
     private String description;
 
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;

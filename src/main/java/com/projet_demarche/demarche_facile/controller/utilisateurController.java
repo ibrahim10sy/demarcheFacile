@@ -2,6 +2,7 @@ package com.projet_demarche.demarche_facile.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.projet_demarche.demarche_facile.model.Admin;
 import com.projet_demarche.demarche_facile.model.Utilisateur;
 import com.projet_demarche.demarche_facile.service.UtilisateurService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,10 +63,10 @@ public class utilisateurController {
     public ResponseEntity<Utilisateur> getUtilisateurById(@Valid @PathVariable long id){
         return new ResponseEntity<>(utilisateurService.getUtilisateurById(id),HttpStatus.OK) ;
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     @Operation(summary = "Suppression d'un utilisateur")
-    public ResponseEntity<String> deleteUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
-        return new ResponseEntity<>(utilisateurService.deleteUserById(utilisateur), HttpStatus.OK);
+    public ResponseEntity<String> deleteUtilisateur(@PathVariable long id){
+        return new ResponseEntity<>(utilisateurService.deleteUserById(id), HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -73,4 +74,5 @@ public class utilisateurController {
     public Object connexion(@RequestParam("email") String email, @RequestParam("mdp") String mdp){
         return utilisateurService.connexion(email, mdp);
     }
+
 }

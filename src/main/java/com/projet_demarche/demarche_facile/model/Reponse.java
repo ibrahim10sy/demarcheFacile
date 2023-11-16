@@ -17,4 +17,12 @@ public class Reponse {
     @ManyToOne
     @JoinColumn(name = "idForum")
     private Forum forum;
+
+    @ManyToOne
+    @JoinColumn(name="idUtilisateur")
+    private Utilisateur utilisateur;
+
+    @ManyToOne
+    @JoinColumn(name="idAdmin")
+    private Admin admin;
 }

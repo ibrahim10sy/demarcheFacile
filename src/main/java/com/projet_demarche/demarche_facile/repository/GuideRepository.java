@@ -10,4 +10,5 @@ public interface GuideRepository extends JpaRepository<Guide,Long> {
 
     public Guide findByIdGuide(long id);
     public Guide findByLibelle(String libelle);
+
 }

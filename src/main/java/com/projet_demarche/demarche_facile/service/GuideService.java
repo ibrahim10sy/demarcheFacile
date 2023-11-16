@@ -39,7 +39,7 @@ public class GuideService {
                             Files.createDirectories(rootlocation);
                             Files.copy(multipartFileImage.getInputStream(),
                                     rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                            guide.setImage("http://localhost/demarche/"
+                            guide.setImage("http://10.175.48.71/demarche/"
                                     + multipartFileImage.getOriginalFilename());
                         } else {
                             try {
@@ -48,12 +48,12 @@ public class GuideService {
                                 if (!Files.exists(name)) {
                                     Files.copy(multipartFileImage.getInputStream(),
                                             rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                                    guide.setImage("http://localhost/demarche/"
+                                    guide.setImage("http://10.175.48.71/demarche/"
                                             + multipartFileImage.getOriginalFilename());
                                 } else {
                                     Files.delete(name);
                                     Files.copy(multipartFileImage.getInputStream(), rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                                    guide.setImage("http://localhost/demarche/"
+                                    guide.setImage("http://10.175.48.71/demarche/"
                                             + multipartFileImage.getOriginalFilename());
                                 }
                             } catch (Exception e) {
@@ -73,7 +73,7 @@ public class GuideService {
                             Files.createDirectories(rootlocation);
                             Files.copy(multipartFileAudio.getInputStream(),
                                     rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                            guide.setAudio("http://localhost/audio_demarche/"
+                            guide.setAudio("http://10.175.48.71/audio_demarche/"
                                     + multipartFileAudio.getOriginalFilename());
                         } else {
                             try {
@@ -82,12 +82,12 @@ public class GuideService {
                                 if (!Files.exists(name)) {
                                     Files.copy(multipartFileAudio.getInputStream(),
                                             rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                                    guide.setAudio("http://localhost/audio_demarche/"
+                                    guide.setAudio("http://10.175.48.71/audio_demarche/"
                                             + multipartFileAudio.getOriginalFilename());
                                 } else {
                                     Files.delete(name);
                                     Files.copy(multipartFileAudio.getInputStream(), rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                                    guide.setAudio("http://localhost/audio_demarche/"
+                                    guide.setAudio("http://10.175.48.71/audio_demarche/"
                                             + multipartFileAudio.getOriginalFilename());
                                 }
                             } catch (Exception e) {
@@ -104,6 +104,51 @@ public class GuideService {
             }
         }
     }
+  /*  public Guide createGuide(Guide guide, MultipartFile multipartFileImage, MultipartFile multipartFileAudio) throws Exception {
+        Admin admin = adminRepository.findByIdAdmin(guide.getAdmin().getIdAdmin());
+        if(admin == null) {
+            throw new EntityNotFoundException("Compte non trouvé");
+        } else {
+            if (guideRepository.findByLibelle(guide.getLibelle()) != null) {
+                throw new EntityExistsException("Ce guide existe déjà");
+            } else {
+                try {
+                    if (multipartFileImage != null) {
+                        // Logique de gestion de l'image
+                        String imageUrl = saveFile(multipartFileImage, "C:\\xampp\\htdocs\\demarche");
+                        guide.setImage(imageUrl);
+                    }
+                    if (multipartFileAudio != null) {
+                        // Logique de gestion de l'audio
+                        String audioUrl = saveFile(multipartFileAudio, "C:\\xampp\\htdocs\\audio_demarche");
+                        guide.setAudio(audioUrl);
+                    }
+                    return guideRepository.save(guide);
+                } catch (Exception e) {
+                    throw new Exception("Erreur lors de la création du guide : " + e.getMessage());
+                }
+            }
+        }
+    }
+
+    private String saveFile(MultipartFile file, String location) throws Exception {
+        try {
+            Path rootLocation = Paths.get(location);
+            if (!Files.exists(rootLocation)) {
+                Files.createDirectories(rootLocation);
+            }
+            String fileName = file.getOriginalFilename();
+            Path filePath = rootLocation.resolve(fileName);
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+            }
+            Files.copy(file.getInputStream(), filePath);
+            return "http://10.175.48.71/" + location + "/" + fileName;
+        } catch (Exception e) {
+            throw new Exception("Impossible de télécharger le fichier : " + e.getMessage());
+        }
+    }
+*/
     //methode update
     public Guide updateGuide(Guide guide,long id, MultipartFile multipartFileImage, MultipartFile multipartFileAudio) throws Exception {
         Guide guide1 = guideRepository.findById(id).orElseThrow(()->
@@ -120,7 +165,7 @@ public class GuideService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFileImage.getInputStream(),
                             rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                    guide1.setImage("http://localhost/demarche/"
+                    guide1.setImage("http://10.175.48.71/demarche/"
                             +multipartFileImage.getOriginalFilename());
                 }else{
                     try {
@@ -129,12 +174,12 @@ public class GuideService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFileImage.getInputStream(),
                                     rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                            guide1.setImage("http://localhost/demarche/"
+                            guide1.setImage("http://10.175.48.71/demarche/"
                                     +multipartFileImage.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFileImage.getInputStream(),rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                            guide1.setImage("http://localhost/demarche/"
+                            guide1.setImage("http://10.175.48.71/demarche/"
                                     +multipartFileImage.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -154,7 +199,7 @@ public class GuideService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFileAudio.getInputStream(),
                             rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                    guide1.setAudio("http://localhost/audio_demarche/"
+                    guide1.setAudio("http://10.175.48.71/audio_demarche/"
                             +multipartFileAudio.getOriginalFilename());
                 }else{
                     try {
@@ -163,12 +208,12 @@ public class GuideService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFileAudio.getInputStream(),
                                     rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                            guide1.setAudio("http://localhost/audio_demarche/"
+                            guide1.setAudio("http://10.175.48.71/audio_demarche/"
                                     +multipartFileAudio.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFileAudio.getInputStream(),rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                            guide1.setAudio("http://localhost/audio_demarche/"
+                            guide1.setAudio("http://10.175.48.71/audio_demarche/"
                                     +multipartFileAudio.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -193,10 +238,11 @@ public class GuideService {
         List<Guide> guide = guideRepository.findAll();
         return  guide;
     }
-    public String delete(Guide guide){
-        Guide guide1 = guideRepository.findByIdGuide(guide.getIdGuide());
+    public String delete(long id){
+        Guide guide1 = guideRepository.findByIdGuide(id);
         if(guide1 == null)
             throw new EntityExistsException("Impossible de supprimé car aucun guide trouvé");
+        guideRepository.deleteById(id);
         return "Supprimé avec succèss";
     }
 }

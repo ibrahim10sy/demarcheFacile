@@ -14,10 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Bureau")
+@CrossOrigin
 public class BureauController {
 
     @Autowired
-    BureauService bureauService;
+   private BureauService bureauService;
 
     @PostMapping("/create")
     @Operation(summary = "Création de bureau")
@@ -48,9 +49,9 @@ public class BureauController {
     public ResponseEntity<List<Bureau>> getBureauxByIdDocumentAndNom(@RequestParam long idDocument, @RequestParam String nom) {
         return new ResponseEntity<>( bureauService.getBureauxByIdDocumentAndNom(idDocument, nom), HttpStatus.OK);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     @Operation(summary = "Suppression d'un bureau")
-    public ResponseEntity<String> deleteBureau(@Valid @RequestBody Bureau bureau){
-        return new ResponseEntity<>(bureauService.deleteBureau(bureau), HttpStatus.OK);
+    public ResponseEntity<String> deleteBureau(@PathVariable long id){
+        return new ResponseEntity<>(bureauService.deleteBureau(id), HttpStatus.OK);
     }
 }

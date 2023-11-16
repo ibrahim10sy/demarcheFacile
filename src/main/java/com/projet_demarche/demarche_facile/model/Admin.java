@@ -33,7 +33,7 @@ public class Admin {
 
     @OneToMany(mappedBy = "admin")
     @JsonIgnore
-    private List<Concour> concours;
+    private List<Actualite> actualites;
 
     @OneToMany(mappedBy = "admin")
     @JsonIgnore
@@ -50,4 +50,12 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     @JsonIgnore
     private List<ContactUserAdmin> contactUserAdmins;
+
+    @OneToMany(mappedBy = "admin")
+    @JsonIgnore
+    private List<Document> documents;
+
+    @OneToMany(mappedBy = "admin")
+    @JsonIgnore
+    private List<Reponse> reponses;
 }

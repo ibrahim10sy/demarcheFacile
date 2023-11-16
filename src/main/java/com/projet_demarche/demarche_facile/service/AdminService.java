@@ -8,7 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.webjars.NotFoundException;
 
+import javax.naming.AuthenticationException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -131,11 +133,18 @@ public class AdminService {
         return "Compte supprimé avec succèss";
         }
 
-        public Admin connexion(String email, String mdp){
-        Admin admin = adminRepository.findByEmailAndMotDePasse(email,mdp);
+       /* public Admin connexion(String email, String motDePasse) throws AuthenticationException {
+        Admin admin = adminRepository.findByEmailAndMotDePasse(email,motDePasse);
         if(admin == null)
-            throw new EntityNotFoundException("Connexion impossible");
+            throw new AuthenticationException("Invalid email or password");
         return admin;
+        }*/
+    public Admin connexion(String email, String motDePasse){
+        if(adminRepository.findByEmailAndMotDePasse(email,motDePasse) != null){
+            return adminRepository.findByEmailAndMotDePasse(email, motDePasse);
+        }else{
+            throw  new NotFoundException("Ce compte n'existe pas");
         }
+    }
 
 }

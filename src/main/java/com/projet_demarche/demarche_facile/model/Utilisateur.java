@@ -31,11 +31,15 @@ public class Utilisateur {
     @Column(nullable = false)
     private String motDePasse;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<Forum> forum;
+    private List<Forum> forums;
 
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<Reponse> reponses;
+
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<ContactUserAdmin> contactUserAdmins;
 }

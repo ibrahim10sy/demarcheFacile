@@ -25,7 +25,7 @@ public class BureauService {
         if(admin == null)
             throw new EntityExistsException("Compte non trouvé");
 
-      return   bureauRepository.save(bureau);
+      return bureauRepository.save(bureau);
     }
 
     public Bureau updateBureau(long id, Bureau bureau){
@@ -58,11 +58,12 @@ public class BureauService {
     public List<Bureau> getBureauxByIdDocumentAndNom(long idDocument, String nom) {
         return bureauRepository.findByIdDocumentAndNom(idDocument, nom);
     }
-    public String deleteBureau(Bureau bureau){
-        Bureau bureau1 = bureauRepository.findByIdBureau(bureau.getIdBureau());
+    public String deleteBureau(long id){
+        Bureau bureau1 = bureauRepository.findByIdBureau(id);
         if(bureau1 == null)
             throw new EntityNotFoundException("Impossible de supprimé le bureau");
         bureauRepository.delete(bureau1);
         return "Supprimé avec succèss";
     }
+
 }

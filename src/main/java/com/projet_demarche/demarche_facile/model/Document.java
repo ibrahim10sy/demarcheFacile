@@ -33,12 +33,20 @@ public class Document {
     @JoinColumn(name="idGuide")
     private Guide guide;
 
-    @ManyToMany
+    @ManyToOne
+    @JoinColumn(name="idAdmin")
+    private Admin admin;
+
+    @ManyToOne
+    @JoinColumn(name="idBureau")
+    private Bureau bureau;
+   /* @ManyToMany
     @JoinTable(
             name = "bureau_document",
             joinColumns = @JoinColumn(name = "idDocument"),
             inverseJoinColumns = @JoinColumn(name = "idBureau")
     )
     @JsonIgnore
-    private List<Bureau> bureaux;
+    private List<Bureau> bureaux;*/
+
 }
