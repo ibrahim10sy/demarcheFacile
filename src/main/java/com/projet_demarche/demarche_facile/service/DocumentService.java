@@ -58,7 +58,7 @@ public class DocumentService {
                             Files.createDirectories(rootlocation);
                             Files.copy(multipartFileImage.getInputStream(),
                                     rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                            document.setImage("http://localhost/demarche/"
+                            document.setImage("http://10.175.48.71/demarche/"
                                     + multipartFileImage.getOriginalFilename());
                         } else {
                             try {
@@ -67,12 +67,12 @@ public class DocumentService {
                                 if (!Files.exists(name)) {
                                     Files.copy(multipartFileImage.getInputStream(),
                                             rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                                    document.setImage("http://localhost/demarche/"
+                                    document.setImage("http://10.175.48.71/demarche/"
                                             + multipartFileImage.getOriginalFilename());
                                 } else {
                                     Files.delete(name);
                                     Files.copy(multipartFileImage.getInputStream(), rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                                    document.setImage("http://localhost/demarche/"
+                                    document.setImage("http://10.175.48.71/demarche/"
                                             + multipartFileImage.getOriginalFilename());
                                 }
                             } catch (Exception e) {
@@ -92,7 +92,7 @@ public class DocumentService {
                             Files.createDirectories(rootlocation);
                             Files.copy(multipartFileAudio.getInputStream(),
                                     rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                            document.setAudio("http://localhost/audio_demarche/"
+                            document.setAudio("http://10.175.48.71/audio_demarche/"
                                     + multipartFileAudio.getOriginalFilename());
                         } else {
                             try {
@@ -101,12 +101,12 @@ public class DocumentService {
                                 if (!Files.exists(name)) {
                                     Files.copy(multipartFileAudio.getInputStream(),
                                             rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                                    document.setAudio("http://localhost/audio_demarche/"
+                                    document.setAudio("http://10.175.48.71/audio_demarche/"
                                             + multipartFileAudio.getOriginalFilename());
                                 } else {
                                     Files.delete(name);
                                     Files.copy(multipartFileAudio.getInputStream(), rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                                    document.setAudio("http://localhost/audio_demarche/"
+                                    document.setAudio("http://10.175.48.71/audio_demarche/"
                                             + multipartFileAudio.getOriginalFilename());
                                 }
                             } catch (Exception e) {
@@ -126,7 +126,7 @@ public class DocumentService {
                             Files.createDirectories(rootlocation);
                             Files.copy(multipartFileFichier.getInputStream(),
                                     rootlocation.resolve(multipartFileFichier.getOriginalFilename()));
-                            document.setImage("http://localhost/demerche_fichier/"
+                            document.setImage("http://10.175.48.71/demerche_fichier/"
                                     + multipartFileFichier.getOriginalFilename());
                         } else {
                             try {
@@ -135,12 +135,12 @@ public class DocumentService {
                                 if (!Files.exists(name)) {
                                     Files.copy(multipartFileFichier.getInputStream(),
                                             rootlocation.resolve(multipartFileFichier.getOriginalFilename()));
-                                    document.setImage("http://localhost/demerche_fichier/"
+                                    document.setImage("http://10.175.48.71/demerche_fichier/"
                                             + multipartFileFichier.getOriginalFilename());
                                 } else {
                                     Files.delete(name);
                                     Files.copy(multipartFileFichier.getInputStream(), rootlocation.resolve(multipartFileFichier.getOriginalFilename()));
-                                    document.setImage("http://localhost/demerche_fichier/"
+                                    document.setImage("http://10.175.48.71/demerche_fichier/"
                                             + multipartFileFichier.getOriginalFilename());
                                 }
                             } catch (Exception e) {
@@ -170,7 +170,7 @@ public class DocumentService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFileImage.getInputStream(),
                             rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                    document1.setImage("http://localhost/demarche/"
+                    document1.setImage("http://10.175.48.71/demarche/"
                             + multipartFileImage.getOriginalFilename());
                 } else {
                     try {
@@ -179,12 +179,12 @@ public class DocumentService {
                         if (!Files.exists(name)) {
                             Files.copy(multipartFileImage.getInputStream(),
                                     rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                            document1.setImage("http://localhost/demarche/"
+                            document1.setImage("http://10.175.48.71/demarche/"
                                     + multipartFileImage.getOriginalFilename());
                         } else {
                             Files.delete(name);
                             Files.copy(multipartFileImage.getInputStream(), rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                            document1.setImage("http://localhost/demarche/"
+                            document1.setImage("http://10.175.48.71/demarche/"
                                     + multipartFileImage.getOriginalFilename());
                         }
                     } catch (Exception e) {
@@ -204,7 +204,7 @@ public class DocumentService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFileAudio.getInputStream(),
                             rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                    document1.setAudio("http://localhost/audio_demarche/"
+                    document1.setAudio("http://10.175.48.71/audio_demarche/"
                             + multipartFileAudio.getOriginalFilename());
                 } else {
                     try {
@@ -213,12 +213,12 @@ public class DocumentService {
                         if (!Files.exists(name)) {
                             Files.copy(multipartFileAudio.getInputStream(),
                                     rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                            document1.setAudio("http://localhost/audio_demarche/"
+                            document1.setAudio("http://10.175.48.71/audio_demarche/"
                                     + multipartFileAudio.getOriginalFilename());
                         } else {
                             Files.delete(name);
                             Files.copy(multipartFileAudio.getInputStream(), rootlocation.resolve(multipartFileAudio.getOriginalFilename()));
-                            document1.setAudio("http://localhost/audio_demarche/"
+                            document1.setAudio("http://10.175.48.71/audio_demarche/"
                                     + multipartFileAudio.getOriginalFilename());
                         }
                     } catch (Exception e) {
@@ -237,7 +237,7 @@ public class DocumentService {
                         Files.createDirectories(rootlocation);
                         Files.copy(multipartFileFichier.getInputStream(),
                                 rootlocation.resolve(multipartFileFichier.getOriginalFilename()));
-                        document1.setImage("http://localhost/demerche_fichier/"
+                        document1.setImage("http://10.175.48.71/demerche_fichier/"
                                 + multipartFileFichier.getOriginalFilename());
                     } else {
                         try {
@@ -246,12 +246,12 @@ public class DocumentService {
                             if (!Files.exists(name)) {
                                 Files.copy(multipartFileFichier.getInputStream(),
                                         rootlocation.resolve(multipartFileFichier.getOriginalFilename()));
-                                document1.setImage("http://localhost/demerche_fichier/"
+                                document1.setImage("http://10.175.48.71/demerche_fichier/"
                                         + multipartFileFichier.getOriginalFilename());
                             } else {
                                 Files.delete(name);
                                 Files.copy(multipartFileFichier.getInputStream(), rootlocation.resolve(multipartFileFichier.getOriginalFilename()));
-                                document1.setImage("http://localhost/demerche_fichier/"
+                                document1.setImage("http://10.175.48.71/demerche_fichier/"
                                         + multipartFileFichier.getOriginalFilename());
                             }
                         } catch (Exception e) {

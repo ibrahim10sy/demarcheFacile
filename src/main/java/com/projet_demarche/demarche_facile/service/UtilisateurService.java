@@ -1,6 +1,7 @@
 package com.projet_demarche.demarche_facile.service;
 
 import com.projet_demarche.demarche_facile.Exception.NoContentException;
+import com.projet_demarche.demarche_facile.model.Admin;
 import com.projet_demarche.demarche_facile.model.Utilisateur;
 import com.projet_demarche.demarche_facile.repository.UtilisateurRepository;
 import jakarta.persistence.EntityExistsException;
@@ -8,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.webjars.NotFoundException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +35,7 @@ public class UtilisateurService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    utilisateur.setImage("http://localhost/demarche/"
+                    utilisateur.setImage("http:// 10.175.48.71/demarche/"
                     +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -42,12 +44,12 @@ public class UtilisateurService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            utilisateur.setImage("http://localhost/demarche/"
+                            utilisateur.setImage("http:// 10.175.48.71/demarche/"
                             +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            utilisateur.setImage("http://localhost/demarche/"
+                            utilisateur.setImage("http:// 10.175.48.71/demarche/"
                             +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -58,6 +60,7 @@ public class UtilisateurService {
                 throw new Exception(e.getMessage());
             }
         }
+        System.out.println(utilisateur);
         return  utilisateurRepository.save(utilisateur);
     }else{
         throw new EntityExistsException("Cet compte existe déjà");
@@ -104,7 +107,7 @@ public class UtilisateurService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    user.setImage("http://localhost/demarche/"
+                    user.setImage("http://10.175.48.71/demarche/"
                             +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -113,12 +116,12 @@ public class UtilisateurService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            user.setImage("http://localhost/demarche/"
+                            user.setImage("http://10.175.48.71/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            user.setImage("http://localhost/demarche/"
+                            user.setImage("http://10.175.48.71/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -144,11 +147,20 @@ public class UtilisateurService {
     }
 
     //connexion d'user
-    public Utilisateur connexion(String email, String motDePsse){
-        Utilisateur utilisateur = utilisateurRepository.findByEmailAndMotDePasse(email, motDePsse);
-        if(utilisateur == null){
-            throw  new EntityNotFoundException("Ce compte n'existe pas");
+  /*  public Utilisateur connexion(String email, String motDePasse){
+        if(utilisateurRepository.findByEmailAndMotDePasse(email,motDePasse) != null){
+            return utilisateurRepository.findByEmailAndMotDePasse(email, motDePasse);
+        }else{
+            throw  new NotFoundException("Ce compte n'existe pas");
         }
-        return utilisateur;
+        return
+    }*/
+    public Utilisateur connection(String email, String motDePasse){
+        Utilisateur user = utilisateurRepository.findByEmailAndMotDePasse(email, motDePasse);
+        if (user == null) {
+            throw new EntityNotFoundException("Cet utilisateur n'existe pas");
+        }
+
+        return user;
     }
 }

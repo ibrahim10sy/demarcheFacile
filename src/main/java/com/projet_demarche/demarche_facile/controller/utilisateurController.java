@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -23,7 +24,7 @@ public class utilisateurController {
 
     private UtilisateurService utilisateurService;
 
-    @PostMapping("/create")
+  /*  @PostMapping("/create")
     @Operation(summary = "Création de compte utilisateur")
     public ResponseEntity<Utilisateur> createUtilisateur(@Valid @RequestParam("utilisateur") String utilisateurString,
                                                          @RequestParam(value = "image", required = false)MultipartFile multipartFile) throws Exception {
@@ -35,7 +36,24 @@ public class utilisateurController {
         }
         Utilisateur saveUser = utilisateurService.createUser(utilisateur,multipartFile);
         return  new ResponseEntity<>(saveUser, HttpStatus.CREATED);
-    }
+    }*/
+  @PostMapping("/create")
+  @Operation(summary = "Création d'un utilisateur")
+  public ResponseEntity<Utilisateur> createUtilisateur(
+          @Valid @RequestParam("utilisateur") String utilisateurString,
+          @RequestParam(value ="image", required=false) MultipartFile multipartFile) throws Exception {
+
+      Utilisateur utilisateur = new Utilisateur();
+      try{
+          utilisateur = new JsonMapper().readValue(utilisateurString, Utilisateur.class);
+      }catch(JsonProcessingException e){
+          throw new Exception(e.getMessage());
+      }
+
+      Utilisateur savedUser = utilisateurService.createUser(utilisateur,multipartFile);
+
+      return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+  }
 
     @PutMapping("update/{id}")
     @Operation(summary = "Mise à jour d'un utilisateur")
@@ -69,10 +87,22 @@ public class utilisateurController {
         return new ResponseEntity<>(utilisateurService.deleteUserById(id), HttpStatus.OK);
     }
 
+   /* @PostMapping("/connexion")
+    @Operation(summary = "Connexion d'un utilisateur")
+    public ResponseEntity<Object> connexion(@RequestBody Map<String, String> requestBody) {
+        String email = requestBody.get("email");
+        String motDePasse = requestBody.get("motDePasse");
+
+        System.out.println("Email: " + email);
+        System.out.println("Mot de passe: " + motDePasse);
+
+        return new ResponseEntity<>(utilisateurService.connection(email, motDePasse), HttpStatus.OK);
+    }*/
+
     @PostMapping("/login")
     @Operation(summary = "Connexion d'un utilisateur")
-    public Object connexion(@RequestParam("email") String email, @RequestParam("mdp") String mdp){
-        return utilisateurService.connexion(email, mdp);
+    public Object connexion(@RequestParam("email") String email,
+                            @RequestParam("motDePasse") String motDePasse) {
+        return utilisateurService.connection(email, motDePasse);
     }
-
 }
