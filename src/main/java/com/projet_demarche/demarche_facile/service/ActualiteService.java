@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
 @Service
@@ -25,6 +27,10 @@ public class ActualiteService {
 
         if(admin == null)
             throw new IllegalArgumentException("Admin non trouvé");
+        LocalDate toDay = LocalDate.now(); // Obtention de la date du jour en type LocalDate
+        LocalDate dateDebut = actualite.getDateDebut(); // Capture de la date de dÃ©but du buget Ã  inserer
+        //LocalDate dateFin ; // DÃ©claration du variable de type LocalDate qui vas nous servir de personnaliser la date de fin du budget Ã  inserer
+        LocalDate jourMaxDuMois = dateDebut.with(TemporalAdjusters.lastDayOfMonth());
         if(multipartFile != null){
             String location = "C:\\xampp\\htdocs\\demarche";
             try{

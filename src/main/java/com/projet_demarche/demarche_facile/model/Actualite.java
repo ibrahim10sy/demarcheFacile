@@ -26,11 +26,11 @@ public class Actualite {
 
     @NotNull(message = "Désole la date ne doit pas etre null")
     @Column(nullable = false)
-    private Date dateDebut;
+    private LocalDate dateDebut;
 
 
     @Column(nullable = false)
-    private Date dateFin;
+    private LocalDate dateFin;
 
     @NotNull
     @ManyToOne
