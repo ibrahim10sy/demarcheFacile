@@ -22,45 +22,43 @@ public class ActualiteService {
     ActualiteRepository actualiteRepository;
     @Autowired
     AdminRepository adminRepository;
-    public Actualite createActualite(Actualite actualite, MultipartFile multipartFile) throws Exception {
+    public Actualite createActualite(Actualite actualite, MultipartFile multipartFileImage) throws Exception {
         Admin admin = adminRepository.findByIdAdmin(actualite.getAdmin().getIdAdmin());
 
         if(admin == null)
             throw new IllegalArgumentException("Admin non trouvé");
-        LocalDate toDay = LocalDate.now(); // Obtention de la date du jour en type LocalDate
-        LocalDate dateDebut = actualite.getDateDebut(); // Capture de la date de dÃ©but du buget Ã  inserer
-        //LocalDate dateFin ; // DÃ©claration du variable de type LocalDate qui vas nous servir de personnaliser la date de fin du budget Ã  inserer
-        LocalDate jourMaxDuMois = dateDebut.with(TemporalAdjusters.lastDayOfMonth());
-        if(multipartFile != null){
+
+        //image
+        if (multipartFileImage != null) {
             String location = "C:\\xampp\\htdocs\\demarche";
-            try{
+            try {
                 Path rootlocation = Paths.get(location);
-                if(!Files.exists(rootlocation)){
+                if (!Files.exists(rootlocation)) {
                     Files.createDirectories(rootlocation);
-                    Files.copy(multipartFile.getInputStream(),
-                            rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    actualite.setImage("http://localhost:8080/demarche"
-                            +multipartFile.getOriginalFilename());
-                }else{
+                    Files.copy(multipartFileImage.getInputStream(),
+                            rootlocation.resolve(multipartFileImage.getOriginalFilename()));
+                    actualite.setImage("http://10.175.48.9/demarche/"
+                            + multipartFileImage.getOriginalFilename());
+                } else {
                     try {
-                        String nom = location+"\\"+multipartFile.getOriginalFilename();
+                        String nom = location + "\\" + multipartFileImage.getOriginalFilename();
                         Path name = Paths.get(nom);
-                        if(!Files.exists(name)){
-                            Files.copy(multipartFile.getInputStream(),
-                                    rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            actualite.setImage("http://localhost:8080/demarche"
-                                    +multipartFile.getOriginalFilename());
-                        }else{
+                        if (!Files.exists(name)) {
+                            Files.copy(multipartFileImage.getInputStream(),
+                                    rootlocation.resolve(multipartFileImage.getOriginalFilename()));
+                            actualite.setImage("demarche/"
+                                    + multipartFileImage.getOriginalFilename());
+                        } else {
                             Files.delete(name);
-                            Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            actualite.setImage("http://localhost:8080/demarche"
-                                    +multipartFile.getOriginalFilename());
+                            Files.copy(multipartFileImage.getInputStream(), rootlocation.resolve(multipartFileImage.getOriginalFilename()));
+                            actualite.setImage("demarche/"
+                                    + multipartFileImage.getOriginalFilename());
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         throw new Exception("Impossible de télécharger l\'image");
                     }
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 throw new Exception(e.getMessage());
             }
     }
@@ -83,7 +81,7 @@ public class ActualiteService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    actualite1.setImage("http://localhost:8080/demarche"
+                    actualite1.setImage("demarche/"
                             +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -92,12 +90,12 @@ public class ActualiteService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            actualite1.setImage("http://localhost:8080/demarche"
+                            actualite1.setImage("demarche/"
                                     +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            actualite1.setImage("http://localhost:8080/demarche"
+                            actualite1.setImage("demarche/"
                                     +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){

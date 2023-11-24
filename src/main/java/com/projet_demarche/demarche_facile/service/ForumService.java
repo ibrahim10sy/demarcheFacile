@@ -31,6 +31,7 @@ public class ForumService {
         Utilisateur utilisateur = utilisateurRepository.findByIdUtilisateur(forum.getUtilisateur().getIdUtilisateur());
         if (utilisateur == null)
             throw new IllegalArgumentException("Utilisateur non trouvé avec l'ID spécifié");
+        System.out.println(forum);
         return forumRepository.save(forum);
     }
 

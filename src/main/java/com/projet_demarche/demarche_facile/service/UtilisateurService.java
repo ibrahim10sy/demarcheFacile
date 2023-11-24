@@ -35,7 +35,7 @@ public class UtilisateurService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    utilisateur.setImage("http:// 10.175.48.39/demarche/"
+                    utilisateur.setImage("http:// 10.175.48.9/demarche/"
                     +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -44,12 +44,12 @@ public class UtilisateurService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            utilisateur.setImage("http:// 10.175.48.39/demarche/"
+                            utilisateur.setImage("http:// 10.175.48.9/demarche/"
                             +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            utilisateur.setImage("http:// 10.175.48.39/demarche/"
+                            utilisateur.setImage("http:// 10.175.48.9/demarche/"
                             +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){
@@ -107,7 +107,7 @@ public class UtilisateurService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFile.getInputStream(),
                             rootlocation.resolve(multipartFile.getOriginalFilename()));
-                    user.setImage("http://10.175.48.39/demarche/"
+                    user.setImage("http://10.175.48.9/demarche/"
                             +multipartFile.getOriginalFilename());
                 }else{
                     try {
@@ -116,12 +116,12 @@ public class UtilisateurService {
                         if(!Files.exists(name)){
                             Files.copy(multipartFile.getInputStream(),
                                     rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            user.setImage("http://10.175.48.39/demarche/"
+                            user.setImage("http://10.175.48.9/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }else{
                             Files.delete(name);
                             Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                            user.setImage("http://10.175.48.39/demarche/"
+                            user.setImage("http://10.175.48.9/demarche/"
                                     +multipartFile.getOriginalFilename());
                         }
                     }catch (Exception e){

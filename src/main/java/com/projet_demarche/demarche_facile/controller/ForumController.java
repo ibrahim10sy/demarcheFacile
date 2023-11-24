@@ -25,7 +25,7 @@ public class ForumController {
         return new ResponseEntity<>(forumService.createForumAdmin(forum), HttpStatus.CREATED );
     }
 
-    @PostMapping("/createForUser/{id}")
+    @PostMapping("/createForUser")
     @Operation(summary = "Forum créer par user")
     public ResponseEntity<Forum> createForUtilisateur(@Valid @RequestBody Forum forum){
         return new ResponseEntity<>(forumService.createForumUtilisateur(forum), HttpStatus.CREATED );

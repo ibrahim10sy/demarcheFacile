@@ -27,7 +27,7 @@ public class ActualiteController {
     @Operation(summary = "Création d'un actualité")
     public ResponseEntity<Actualite> createActualite(
             @Valid @RequestParam("actualite") String actualiteString,
-             @RequestParam(value = "image", required = false) MultipartFile multipartFile) throws Exception {
+            @RequestParam(value = "image", required = false) MultipartFile multipartFileImage) throws Exception {
 
         Actualite actualite = new Actualite();
         try{
@@ -35,7 +35,7 @@ public class ActualiteController {
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
-        Actualite saveActualite = actualiteService.createActualite(actualite,multipartFile);
+        Actualite saveActualite = actualiteService.createActualite(actualite,multipartFileImage);
         return new ResponseEntity<>(saveActualite, HttpStatus.CREATED);
     }
 

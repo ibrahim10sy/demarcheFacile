@@ -1,10 +1,10 @@
 package com.projet_demarche.demarche_facile.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -26,11 +26,13 @@ public class Actualite {
 
     @NotNull(message = "Désole la date ne doit pas etre null")
     @Column(nullable = false)
-    private LocalDate dateDebut;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dateDebut;
 
 
     @Column(nullable = false)
-    private LocalDate dateFin;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dateFin;
 
     @NotNull
     @ManyToOne
