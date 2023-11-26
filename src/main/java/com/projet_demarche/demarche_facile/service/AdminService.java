@@ -34,7 +34,7 @@ public class AdminService {
                         Files.createDirectories(rootlocation);
                         Files.copy(multipartFile.getInputStream(),
                                 rootlocation.resolve(multipartFile.getOriginalFilename()));
-                        admin.setImage("http://localhost:8080/demarche"
+                        admin.setImage("demarche/"
                                 +multipartFile.getOriginalFilename());
                     }else{
                         try {
@@ -43,12 +43,12 @@ public class AdminService {
                             if(!Files.exists(name)){
                                 Files.copy(multipartFile.getInputStream(),
                                         rootlocation.resolve(multipartFile.getOriginalFilename()));
-                                admin.setImage("http://localhost:8080/demarche"
+                                admin.setImage("demarche/"
                                         +multipartFile.getOriginalFilename());
                             }else{
                                 Files.delete(name);
                                 Files.copy(multipartFile.getInputStream(),rootlocation.resolve(multipartFile.getOriginalFilename()));
-                                admin.setImage("http://localhost:8080/demarche"
+                                admin.setImage("demarche/"
                                         +multipartFile.getOriginalFilename());
                             }
                         }catch (Exception e){

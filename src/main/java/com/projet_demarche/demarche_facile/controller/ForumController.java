@@ -19,7 +19,7 @@ public class ForumController {
     @Autowired
     ForumService forumService;
 
-    @PostMapping("/createForAdmin/{id}")
+    @PostMapping("/createForAdmin")
     @Operation(summary = "Forum créer par admin")
     public ResponseEntity<Forum> createForAdmin(@Valid @RequestBody Forum forum){
         return new ResponseEntity<>(forumService.createForumAdmin(forum), HttpStatus.CREATED );
@@ -31,7 +31,7 @@ public class ForumController {
         return new ResponseEntity<>(forumService.createForumUtilisateur(forum), HttpStatus.CREATED );
     }
 
-    @PutMapping("/update/{idForum}/admin/{idAdmin}")
+    @PutMapping("/update/{idForum}/admin")
     @Operation(summary = "Modifier un forum créer par admin")
     public ResponseEntity<Forum> updateForAdmin(@Valid @RequestBody Forum forum,@PathVariable long idForum, @PathVariable long idAdmin){
         return new ResponseEntity<>(forumService.updateForumAdmin(forum,idForum, idAdmin), HttpStatus.OK );
@@ -68,9 +68,9 @@ public class ForumController {
         return new ResponseEntity<>(forumService.deleteForAdmin(idAdmin), HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteForUtilisateur/{idForum}/utilisateur/{idUtilisateur}")
+    @DeleteMapping("/deleteForUtilisateur/{idForum}/utilisateur")
     @Operation(summary = "Suppression du forum par user")
-    public ResponseEntity<String> deleteForumForUtilisateur(@PathVariable long idUtilisateur){
-        return new ResponseEntity<>(forumService.deleteForUtilisateur(idUtilisateur), HttpStatus.OK);
+    public ResponseEntity<String> deleteForumForUtilisateur(@PathVariable long id){
+        return new ResponseEntity<>(forumService.deleteForUtilisateur(id), HttpStatus.OK);
     }
 }

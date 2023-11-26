@@ -6,23 +6,22 @@ import lombok.Data;
 
 @Data
 @Entity
-
+@Table(name = "contact_user_admin")
 public class ContactUserAdmin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idContact;
 
-    @Column(nullable = false)
-    private String message;
-
     @ManyToOne
-    @JoinColumn(name = "idUtilisateur")
+    @JoinColumn(name = "id_utilisateur", nullable = false)
     private Utilisateur utilisateur;
 
     @ManyToOne
-    @JoinColumn(name = "idAdmin")
+    @JoinColumn(name = "id_admin", nullable = false)
     private Admin admin;
 
+    @Column(nullable = false)
+    private String message;
 
 }
