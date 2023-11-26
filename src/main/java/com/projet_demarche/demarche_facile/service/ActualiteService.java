@@ -37,7 +37,7 @@ public class ActualiteService {
                     Files.createDirectories(rootlocation);
                     Files.copy(multipartFileImage.getInputStream(),
                             rootlocation.resolve(multipartFileImage.getOriginalFilename()));
-                    actualite.setImage("http://10.175.48.9/demarche/"
+                    actualite.setImage("demarche/"
                             + multipartFileImage.getOriginalFilename());
                 } else {
                     try {
