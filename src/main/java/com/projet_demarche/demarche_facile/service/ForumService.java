@@ -101,7 +101,7 @@ public class ForumService {
         List<Forum> forumList = forumRepository.findAll();
         return forumList;
     }
-    public String deleteForAdmin(long id){
+    public String deleteForAdmin(long id, long idAdmin){
        Forum forum = forumRepository.getByIdForum(id);
         if(forum == null)
             throw new EntityExistsException("Impossible de supprimé car aucun forum trouvé");
@@ -117,19 +117,22 @@ public class ForumService {
         return "Supprimé avec succèss";
     }
 
-    public String deleteForUtilisateur(long id){
-        Forum forum = forumRepository.getByIdForum(id);
-        if(forum == null)
-            throw new EntityExistsException("Impossible de supprimé car aucun forum trouvé");
+    public String deleteForUtilisateur(long idForum, long idUtilisateur) {
+        Forum forum = forumRepository.getByIdForum(idForum);
+        if (forum == null) {
+            throw new EntityExistsException("Impossible de supprimer car aucun forum trouvé");
+        }
 
-        Utilisateur utilisateur = utilisateurRepository.findByIdUtilisateur(forum.getUtilisateur().getIdUtilisateur());
-        if(utilisateur == null)
+        Utilisateur utilisateur = utilisateurRepository.findByIdUtilisateur(idUtilisateur);
+        if (utilisateur == null) {
             throw new IllegalArgumentException("Utilisateur non trouvé avec l'ID spécifié");
+        }
 
         if (!forum.getUtilisateur().equals(utilisateur)) {
             throw new IllegalArgumentException("Vous n'êtes pas autorisé à modifier ce forum");
         }
-        forumRepository.deleteById(id);
-        return "Supprimé avec succèss";
+
+        forumRepository.deleteById(idForum);
+        return "Supprimé avec succès";
     }
 }

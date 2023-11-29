@@ -63,14 +63,11 @@ public class ForumController {
 
     }
     @DeleteMapping("/deleteForAdmin/{idForum}/admin/{idAdmin}")
-    @Operation(summary = "Suppression du forum par admin")
-    public ResponseEntity<String> deleteForumForAdmin(@PathVariable long idAdmin){
-        return new ResponseEntity<>(forumService.deleteForAdmin(idAdmin), HttpStatus.OK);
+    public ResponseEntity<String> deleteForAdmin(@PathVariable long idForum, @PathVariable long idAdmin) {
+        return new ResponseEntity<>(forumService.deleteForUtilisateur(idForum, idAdmin), HttpStatus.OK);
     }
-
-    @DeleteMapping("/deleteForUtilisateur/{idForum}/utilisateur")
-    @Operation(summary = "Suppression du forum par user")
-    public ResponseEntity<String> deleteForumForUtilisateur(@PathVariable long id){
-        return new ResponseEntity<>(forumService.deleteForUtilisateur(id), HttpStatus.OK);
+    @DeleteMapping("/deleteForUtilisateur/{idForum}/utilisateur/{idUtilisateur}")
+    public ResponseEntity<String> deleteForumForUtilisateur(@PathVariable long idForum, @PathVariable long idUtilisateur) {
+        return new ResponseEntity<>(forumService.deleteForUtilisateur(idForum, idUtilisateur), HttpStatus.OK);
     }
 }
