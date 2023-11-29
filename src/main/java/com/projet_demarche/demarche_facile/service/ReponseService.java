@@ -36,13 +36,21 @@ public class ReponseService {
         return reponseRepository.save(reponse);
     }
 
-    public Reponse reponseForUtilisateur(Reponse reponse){
+    public Reponse reponseForUtilisateur(Reponse reponse) {
         Utilisateur utilisateur = utilisateurRepository.findByIdUtilisateur(reponse.getUtilisateur().getIdUtilisateur());
-        if(utilisateur == null)
-            throw new IllegalArgumentException("Utilisateur non trouvé");
+        if (utilisateur == null) {
+            throw new EntityNotFoundException("Utilisateur non trouvé avec l'ID spécifié");
+        }
+
         Forum forum = forumRepository.getByIdForum(reponse.getForum().getIdForum());
-        if(forum == null)
-            throw  new IllegalArgumentException("Forum non trouvé");
+        if (forum == null) {
+            throw new EntityNotFoundException("Forum non trouvé avec l'ID spécifié");
+        }
+
+        // Associer la réponse à l'utilisateur et au forum
+        //reponse.setUtilisateur(utilisateur);
+        //reponse.setForum(forum);
+
         return reponseRepository.save(reponse);
     }
 
@@ -66,10 +74,17 @@ public class ReponseService {
         return reponseRepository.save(reponse1);
     }
 
-    public List<Reponse> getReponseForUtilisateur(long idUtilisateur){
-        List<Reponse> reponseList = reponseRepository.getAllReponseByUtilisateur_IdUtilisateur(idUtilisateur);
-        if(reponseList.isEmpty())
-            throw new EntityNotFoundException("Aucune reponse trouvé");
+    public List<Reponse> getReponseForUtilisateur(long idUtilisateur, long idForum) {
+        List<Reponse> reponseList = reponseRepository.getAllReponseByUtilisateur_IdUtilisateurAndForum_IdForum(idUtilisateur, idForum);
+        if (reponseList.isEmpty())
+            throw new EntityNotFoundException("Aucune réponse trouvée");
+        return reponseList;
+    }
+
+    public List<Reponse> getAllReponseForOtherUtilisateurs(long idUtilisateur, long idForum) {
+        List<Reponse> reponseList = reponseRepository.getAllReponseByUtilisateur_IdUtilisateurNotAndForum_IdForum(idUtilisateur, idForum);
+        if (reponseList.isEmpty())
+            throw new EntityNotFoundException("Aucune réponse trouvée pour d'autres utilisateurs");
         return reponseList;
     }
 

@@ -21,13 +21,13 @@ public class ReponseController {
     @Autowired
     ReponseService reponseService;
 
-    @PostMapping("/createForAdmin/{id}")
+    @PostMapping("/createForAdmin")
     @Operation(summary = "Reponse crée par Admin")
     public ResponseEntity<Reponse> createForAdmin(@Valid @RequestBody Reponse reponse){
         return new ResponseEntity<>(reponseService.reponseForAdmin(reponse), HttpStatus.OK);
     }
 
-    @PostMapping("/createForUtilisateur/{id}")
+    @PostMapping("/createForUtilisateur")
     @Operation(summary = "Reponse crée par utilisateur")
     public ResponseEntity<Reponse> createForUtilisateur(@Valid @RequestBody Reponse reponse){
         return new ResponseEntity<>(reponseService.reponseForUtilisateur(reponse), HttpStatus.OK);
@@ -51,12 +51,18 @@ public class ReponseController {
         return new ResponseEntity<>(reponseService.getReponseForAdmin(idAdmin), HttpStatus.OK);
     }
 
-    @GetMapping("/readForUtilisateur/{idUtilisateur}")
-    @Operation(summary = "Affichage des reponses d'un utilisateur")
-    public ResponseEntity<List<Reponse>> getAllForUtilisateur(@PathVariable long idUtilisateur){
-        return new ResponseEntity<>(reponseService.getReponseForAdmin(idUtilisateur), HttpStatus.OK);
+    @GetMapping("/readForUtilisateur/{idUtilisateur}/{idForum}")
+    @Operation(summary = "Affichage des réponses d'un utilisateur pour un forum spécifique")
+    public ResponseEntity<List<Reponse>> getAllForUtilisateur(@PathVariable long idUtilisateur, @PathVariable long idForum) {
+        List<Reponse> reponseList = reponseService.getReponseForUtilisateur(idUtilisateur, idForum);
+        return new ResponseEntity<>(reponseList, HttpStatus.OK);
     }
-
+    @GetMapping("/readForOtherUtilisateurs/{idUtilisateur}/{idForum}")
+    @Operation(summary = "Affichage des réponses des autres utilisateurs pour un forum spécifique")
+    public ResponseEntity<List<Reponse>> getAllForOtherUtilisateurs(@PathVariable long idUtilisateur, @PathVariable long idForum) {
+        List<Reponse> reponseList = reponseService.getAllReponseForOtherUtilisateurs(idUtilisateur, idForum);
+        return new ResponseEntity<>(reponseList, HttpStatus.OK);
+    }
     @DeleteMapping("/deleteForAdmin/{idReponse}/admin/{idAdmin}")
     @Operation(summary = "Suppression d'un reponse par admin")
     public ResponseEntity<String> deleteReponseForAdmin(@PathVariable long idReponse){

@@ -13,6 +13,7 @@ public interface ReponseRepository extends JpaRepository<Reponse,Long> {
 
     Reponse findReponseByIdReponse(long idReponse);
     List<Reponse> getAllReponseByAdmin_IdAdmin(long idAdmin);
-    List<Reponse> getAllReponseByUtilisateur_IdUtilisateur(long idUtilisateur);
+    List<Reponse> getAllReponseByUtilisateur_IdUtilisateurAndForum_IdForum(long idUtilisateur, long idForum);
+    List<Reponse> getAllReponseByUtilisateur_IdUtilisateurNotAndForum_IdForum(long idUtilisateur, long idForum);
 
 }
